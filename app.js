@@ -55,17 +55,17 @@ app.post('/new', function(req, res) {
 
 });
 
-app.get('/:id', function(req, res, next) {
-    uid = req.params.id;
+app.get('/:Id', function(req, res, next) {
+    uid = req.params.Id;
     console.log(uid);
-    myquery = "select adress from urls where id='" + uid + "';";
+    myquery = "select address from urls where id='" + uid + "';";
     pool.query(myquery, function(err, rows, fields) {
         if (err) {
             next();
 
         } else {
-            console.log(rows[0]);
-
+            console.log(rows[0].address);
+            res.redirect('http://' + rows[0].address);
         }
 
 
@@ -84,9 +84,9 @@ app.use(function(req, res, next) {
 });
 
 
-app.listen(3000, function() {
+app.listen(4000, function() {
 
-    console.log("listening on 3000");
+    console.log("listening on 4000");
 
 });
 
